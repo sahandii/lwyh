@@ -1,0 +1,25 @@
+{
+  "name": "lwyh-frontend",
+  "private": true,
+  "dependencies": {
+    "jquery": "1.11.1",
+    "bootstrap-sass": "~3.3.5",
+    "modernizr": "~2.8.1",
+    "smoothstate": "^0.7.2",
+    "angled-edges": "^2.0.0",
+    "breakpoint-sass": "^2.7.1"
+  },
+  "overrides": {
+    "bootstrap-sass": {
+      "main": [
+        "assets/stylesheets/_bootstrap.scss",
+        "assets/fonts/bootstrap/*",
+        "assets/javascripts/bootstrap.js"
+      ]
+    }
+  },
+  "devDependencies": {
+    "chai": "^4.0.0",
+    "mocha": "^3.4.2"
+  }
+}

@@ -1,0 +1,94 @@
+.m-scene .scene_element {
+  animation-duration: 500ms;
+  animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1.000);
+  animation-fill-mode: both;
+}
+.m-scene .scene_element--fadeindown {
+  animation-name: fadeInDown;
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.m-scene .scene_element--slideup {
+  animation-name: slideUp;
+  animation-duration: 500ms;
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translate3d(0, 155%, 0);
+  }
+  100% {
+    transform: none;
+  }
+}
+.m-scene .scene_element--slidedown {
+  animation-name: slideDown;
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translate3d(0, -100%, 0);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+.m-scene .scene_element--fadedownnav {
+  animation-name: fadeDownNav;
+}
+
+@keyframes fadeDownNav {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -30px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.m-scene .scene_element--fadein {
+  animation-name: fadeIn;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.m-scene .scene_element--delayed {
+  animation-delay: 100ms;
+}
+
+.m-scene.is-exiting .scene_element {
+  animation-direction: alternate-reverse;
+}
+
+.m-scene.is-exiting .scene_element--delayed {
+  animation-delay: 0s;
+}
+
+.m-scene.is-exiting .scene_element--noexiting {
+  animation-direction: alternate-reverse;
+}
+
+.is-loading,
+.is-loading a {
+  cursor: progress;
+}

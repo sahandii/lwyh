@@ -1,0 +1,626 @@
+// bower:scss
+@import "../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+@import "../../bower_components/angled-edges/_angled-edges.scss";
+@import "../../bower_components/sassy-maps/sass/_sassy-maps.scss";
+@import "../../bower_components/breakpoint-sass/stylesheets/_breakpoint.scss";
+// endbower
+
+$icon-font-path: '../fonts/';
+@import "_helvetica.scss";
+@import "_mixins.scss";
+@import "_transitions.scss";
+
+body {
+  line-height: 1.5;
+  height:100%;
+  width:100%;
+  font-family: 'Helvetica Neue', sans-serif!important;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* BREAKPOINTS */
+$small-screens: 0 767px;
+$iphone5:0 320px;
+$iphone6:0 375px;
+$onlyipad: 768px 768px;
+$mobile:0 414px;
+$tablet:415px 767px;
+$desktop: 768px;
+$other-desktop:992px;
+$xl-desktop: 1441px;
+
+
+/* Color palette */
+
+$black: #0e0e0e;
+.black{
+  color:$black;
+}
+.black-bg{
+  background-color: $black;
+}
+.black-border{
+  border:1px solid $black;
+}
+
+$white: #fff;
+.white{
+  color:$white;
+}
+.white-bg{
+  background-color: $white;
+}
+.white-border{
+  border:1px solid $white;
+}
+
+$subwhite: #f0f0f0;
+.subwhite{
+  color:$subwhite;
+}
+.subwhite-bg{
+  background-color: $subwhite;
+}
+.subwhite-border{
+  border:1px solid $subwhite;
+}
+$lightgreyborder:#dedede;
+
+.lightgreyborder{
+  color:$lightgreyborder;
+}
+.lightgreyborder-bg{
+  background-color: $lightgreyborder;
+}
+.lightgreyborder-border{
+  border:1px solid $lightgreyborder;
+}
+
+/* Preloader */
+#preloader {
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background-color:$black; /* change if the mask should have another color then subwhite */
+  z-index:100; /* makes sure it stays on top */
+}
+
+#status {
+  width:200px;
+  height:200px;
+  position:absolute;
+  left:50%; /* centers the loading animation horizontally one the screen */
+  top:50%; /* centers the loading animation vertically one the screen */
+  // background-image:url(../img/status.gif);
+  // background-repeat:no-repeat;
+  // background-position:center;
+  margin:-100px 0 0 -100px; /* is width and height divided by two */
+}
+
+.browserupgrade {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+/* Text styles */
+#about a{
+  text-decoration: underline;
+  color:$black;
+}
+h3{
+  font-size: 2em;
+  @include breakpoint($iphone5){
+    font-size: 1.75em;
+  }
+}
+h3 small{
+  color:$white!important;
+}
+#why.about-page{
+  font-weight: 300;
+  font-size: 3.5em;
+  line-height:30px;
+  @include breakpoint($small-screens){
+    font-size: 2.5em;
+    line-height:20px;
+  }
+}
+.headline-two {
+  font-family: 'Helvetica Neue';
+  font-size: 18px;
+  font-weight:700;
+  letter-spacing: -0.5px;
+  @include breakpoint($desktop){
+    font-size:25px;
+  }
+  @include breakpoint($iphone5){
+    font-size:14px;
+  }
+  @include breakpoint($xl-desktop){
+    font-size:2.5em;
+  }
+}
+.headline-three{
+  font-size: 5rem;
+  line-height: 1.1;
+  font-weight: 900;
+  @include breakpoint($desktop){
+    margin:0;
+  }
+  @include breakpoint($iphone5){
+    font-size:31px;
+  }
+}
+h6.who-likes{
+  font-weight: 400;
+  line-height: 1.25;
+  opacity: .5;
+}
+.button-type {
+  @include breakpoint($desktop){
+    font-size: 1.25em;
+  }
+  font-family: 'Helvetica Neue';
+  font-size: 12px;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: 0.4px;
+}
+a:hover, a:focus, a:active{
+  color:$white;
+}
+
+
+/* COMPONENTS */
+
+video#vice-stories{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+  transform: translateX(-50%) translateY(-50%);
+  background: url('../images/poster.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.video-container{
+  &:after{
+    z-index: -1;
+    background-color:rgba(0,0,0,.55);
+    @include after-fill;
+    @include sizePosition(absolute, 100%, 100%, 0, 0)
+  }
+}
+.gif-container{
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height: 100%;
+  @include bg-cover(cover, center);
+  background-image: url('../images/vice-stories.gif');
+  z-index:-1;
+  &:after{
+    z-index: -1;
+    background-color:rgba(0,0,0,.55);
+    @include after-fill;
+    @include sizePosition(absolute, 100%, 100%, 0, 0)
+  }
+}
+#main{
+  position:absolute;
+  top:0;left:0;right:0;bottom:0;
+  width:100%;
+  height:100%;
+  z-index: 0;
+  @include breakpoint($desktop){
+    min-height:568px;
+  }
+}
+#main.up{
+  @include breakpoint($small-screens){
+    transform:translateY(-10%);
+  }
+}
+
+img{
+  max-width:100%;
+}
+.flex-center{
+  display: flex;
+  align-items: center;
+}
+.flex-center-desktop{
+  @include breakpoint($desktop){
+    display: flex;
+    align-items: center;    
+  }
+}
+.flex-column{
+  flex-direction: column;
+}
+hr{
+  border-top:5px solid $black;
+}
+p{
+  font-size: 17px;
+  font-family: 'Lora', sans-serif;
+}
+.mr-auto{
+  margin-right:auto;
+}
+.ml-auto{
+  margin-left:auto;
+}
+.mt-auto{
+  margin-top:auto;
+}
+.mb-auto{
+  margin-bottom:auto;
+}
+.mh-auto{
+  margin-left:auto;
+  margin-right:auto;
+}
+h2{
+  font-size: 25px;
+}
+.text-center{
+  text-align:center;
+}
+.bold{
+  font-weight: 700;
+}
+.fixed{
+  position:fixed;
+}
+.text-center-small-screens{
+  @include breakpoint($small-screens){
+    text-align:center;
+  }
+}
+.flex-center{
+  display: flex;
+  align-items:center;
+}
+
+$qubic: cubic-bezier(0.860, 0.000, 0.070, 1.000);
+
+/* NAVBAR */
+#nav{
+  @include breakpoint($small-screens){
+    will-change:transform;
+    transition: transform 500ms $qubic 0s;
+  }
+}
+#nav.navup{
+  @include breakpoint($small-screens){
+    transform:translateY(-100%);
+    transition: transform 400ms ease-out 0s;
+  }
+}
+.navbar{
+  top:0;
+  left:0;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,.3)),to(rgba(0,0,0,0)));
+  background: linear-gradient(to bottom, rgba(0,0,0,.3) 0%,rgba(0,0,0,0) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 );
+  border:0;
+  width:100%;
+  padding:2em 0;
+  z-index: 99;
+  @include breakpoint($mobile){
+    padding-top:1em;
+  }
+}
+.navbar-center{
+  flex: 2 0 0;
+}
+.navbar svg{
+  @include breakpoint($desktop){
+    width:170px;
+    height:54px;
+  }
+}
+.navbar-left, .navbar-right{
+  flex: 1 0 0;
+  transform:translateY(-100px);
+}
+.navbar-left, .navbar-center{
+  float:left;
+}
+.navbar-right{
+  max-height: 50px;
+  @include breakpoint($desktop){
+    max-height: 65px;
+  }
+  @include breakpoint($iphone5){
+    max-height: 40px;
+  }
+  position:relative;
+  margin-right: 0!important;
+  float:right;
+  text-align: right;
+}
+.inline-flex{
+  display:inline-flex;
+}
+.logout-container{
+  white-space: nowrap;
+  transition: all 400ms ease-in-out 0s;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  width: 75%;
+  border-radius:0px 10px 10px 0px;
+  max-width: 160px;
+  min-width: 110px;
+  text-align: left;
+  transform: translateY(-50%);
+  z-index: -1;
+  a{
+    display: block;
+    padding:.75em;
+    &:hover{
+      color:$white;
+    }
+  }
+}
+.logout-container.closed{
+  width:0;
+  max-width:0;
+  min-width:0;
+}
+.fb-avatar{
+  box-shadow:0 0 20px 0 rgba(0,0,0,.2);
+  width:50px;
+  height:50px;
+  border-radius:50px;
+  background-color:rgba(255,255,255,.25);
+  /*/ Facebook profile picture should be applied as CSS background /*/
+  @include bg-cover(cover, center);
+  background-image:url('../images/avatar.jpg');
+  @include breakpoint($desktop){
+    height:65px;
+    width:65px;
+  }
+  @include breakpoint($iphone5){
+    height:40px;
+    width:40px;
+  }
+}
+.why-button{
+  padding:15px;
+  @include breakpoint($iphone5){
+    padding-right:0!important;
+  }
+}
+/* LOG-IN */
+#lwyh-logo{
+  margin-bottom:2em;
+}
+.lwyh-logo{
+  max-width: 550px;
+  pointer-events: none;
+}
+.index-buttons{
+  position: absolute;
+  margin-top:2em;
+  left: 50%;
+  transform: translateX(-50%);
+  width:100%;
+}
+.btn{
+  border-radius:100px;
+  padding:15px 0;
+  color:$white!important;
+  text-decoration: none!important;
+  border:none;
+  display: block;
+  width:100%;
+  max-width: 250px;
+  &:hover{
+    @extend .black-bg;
+  }
+  @include breakpoint($small-screens){
+    max-width: 200px;
+  }
+  @include breakpoint($mobile){
+    max-width:175px;
+    min-width: 175px;
+    padding:15px 0;
+  }
+}
+.social-bar{
+  @include breakpoint($desktop){
+    margin-top:1em;
+  }
+  @include breakpoint($small-screens){
+    transition: transform 350ms ease-in 0s;
+    box-shadow:0 0 40px -10px rgba(0,0,0,.5);
+    text-align:center;
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    z-index:1;
+    transform:translateY(100%);
+  }
+}
+.social-bar.scrolled{
+  @include breakpoint($small-screens){
+    transform:none;
+    transition: transform 400ms ease-out 0s;
+  }
+}
+.thanks-bar{
+  background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,.3) 90%);
+  background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,.3) 90%);
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,.3) 90%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 );
+  transition: transform 350ms ease-in 0s;
+  text-align:center;
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  z-index:1;
+}
+.social-bar .btn-social{
+  margin:0;
+  margin:1em 0;
+}
+.btn-social{
+  display: inline-block;
+  margin:1em 0 0;
+  font-size: 14px;
+  font-weight: 300;
+  @extend .btn;
+  padding:8px 0;
+  max-width: 150px;
+  @include breakpoint($mobile){
+    min-width: inherit;
+    max-width: 40%
+  }
+}
+.btn-black{
+  background-color:black;
+}
+.btn-fb{
+  background-color:#3965a0;
+}
+.btn-twitter{
+  background-color:#00aced;
+}
+.login-container.preload {
+  position:absolute;
+  width:100%;
+}
+
+.login-container{
+  top:50%;
+  left:50%;
+  position:relative;
+  transform:translate(-50%,-50%);
+}
+
+
+/* FEED */
+
+$balance-height:40vh;
+.bottom-container{
+  position:absolute!important;
+  top:230px;
+  width:100%;
+  @include breakpoint($desktop){
+    bottom:0;
+    top:initial;
+  }
+}
+.feed-container{
+  @include angled-edge('outside top', 'upper left', $subwhite, 45);
+    //ANGLE FIX
+    &:before{
+      pointer-events:none;
+      display: block;
+      content:"";
+    }
+
+    // GRADIENT SHADOW
+    // &:after{
+    //   @include after-fill;
+    //   @include sizePosition(absolute, 100%, 100%, 0, 0);
+    //   width: 200%;
+    //   height: 200%;
+    //   position: absolute;
+    //   top: 2em;
+    //   left: 0;
+    //   box-shadow: inset 0 0 15px 10px #f0f0f0;
+    //   transform: translateX(-50%);
+    //   pointer-events: none;
+    // }
+    @include breakpoint($desktop){
+      padding-top:2em;
+    }
+  }
+  .feed{
+    height:calc(100vh - 230px);
+    overflow: hidden;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    margin-top:2em;
+    padding-bottom: 10em;
+    @include breakpoint($desktop){
+      height:55vh;
+    }
+    @include breakpoint((min-height 1000px) (min-width: xl-desktop)){
+      height:60vh;
+    }
+  }
+  .row.balance{
+    height:58vw;
+    position:fixed;
+    display: flex;
+    align-items: center;
+    @include breakpoint($desktop){
+      min-height: 50vh;
+      max-height:50vh;
+    }
+  }
+  .feed-item{
+    box-shadow: 0 0 0 10px $subwhite;
+    padding:0;
+    overflow: hidden;
+  }
+  .feed-item-details-container{
+    padding: 1em 1em 2em;
+  }
+  .balance-digit{
+    font-size: 10em;
+    margin:0;
+    @include breakpoint($small-screens){
+      font-size: 6em;
+    }
+  }
+  .balance-container{
+    z-index: 2;
+    position: absolute;
+    transform: translateY(-90%);
+    @include breakpoint($desktop){
+      transform: translateY(-80%);
+      height:27vh;
+      justify-content: space-between;
+    }
+    @include breakpoint((min-height 1000px) (min-width $xl-desktop)){
+      transform: translateY(-85%);
+    }
+  }
+
+
+  /* ABOUT PAGE */
+  .about-container{
+    width:100%;
+    top:275px;
+    position: absolute;
+    box-shadow: 0 500px 0 0 $subwhite;
+    @include breakpoint($small-screens){
+      top:200px;
+      height:auto;
+    }
+  }
+  .about{
+    @include breakpoint($onlyipad){
+      width:100%;
+    }
+    margin-top:-50px;
+    padding-bottom:75px;
+  }
